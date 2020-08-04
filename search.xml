@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2020/08/04/stm32-part1/"/>
+      <url>/2020/08/04/stm32-part1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="stm32-part1"><a href="#stm32-part1" class="headerlink" title="stm32-part1"></a>stm32-part1</h1><p>Cortex-M系列处理器使用16位Thumb指令集。</p><p>两种工作模式：</p><ol><li>线程模式（Thread）</li><li>处理模式（Handler）：发生中断或异常的时候</li></ol><p>下载软件和文档：<a href="https://www.stmcu.com.cn/">https://www.stmcu.com.cn/</a> （ST中文官方网站）</p><p>STM32芯片命名规则：</p><p><img src="note.assets/image-20200804093003894.png" alt="image-20200804093003894"></p><p>STM32F0芯片架构</p><p><img src="note.assets/image-20200804101706754.png" alt="image-20200804101706754"></p><p>Cortex-M核心架构</p><p><img src="note.assets/image-20200804101822751.png" alt="image-20200804101822751"></p><p>芯片文档：</p><ul><li><p>参考手册：描述外设控制寄存器相关信息。（平台软件工程师）</p></li><li><p>数据手册：描述芯片硬件相关信息。           （硬件工程师）</p></li><li><p>勘误手册：描述芯片已知问题和规避方法。</p></li><li><p>编程手册：描述CPU通用寄存器，指令集，核心外设。（平台软件工程师）</p></li><li><p>应用笔记：描述芯片具体功能的使用方法。（平台软件工程师）</p></li><li><p>HAL库用户手册：描述HAL和LL库的函数接口（平台软件工程师）</p></li></ul><p>编程方法：</p><ul><li>寄存器编程：运行效率最高，编程效率低，可移植性最差</li><li>标准外设库：稳定，效率比较高，编程效率一般，支持芯片有限，不支持新版本芯片，可移植性较差，已经过时了。</li><li>HAL/LL库：ST公司主推的函数库，可以使用图形化配置，可移植性较好，性能和稳定性相对较差。</li></ul><p>开发环境搭建：</p><ol><li>JRE1.8</li><li>STM32CubeMX（Java开发，生成项目框架和初始化代码）</li><li>安装HAL库（在线安装）</li><li>安装MDK</li><li>安装MDK pack包（STM32F0）</li><li>安装ST-Link驱动</li></ol><p>配置CubeMX</p><ol><li>在help菜单钟选择updater settings</li></ol><p><img src="note.assets/image-20200804113714537.png" alt="image-20200804113714537"></p><ol start="2"><li>Repository目录中不能出现中文，如果有中文需要修改目录。</li></ol><p><img src="note.assets/image-20200804113847723.png" alt="image-20200804113847723"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第一篇测试博客</title>
       <link href="/2020/08/03/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/"/>
       <url>/2020/08/03/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</url>
