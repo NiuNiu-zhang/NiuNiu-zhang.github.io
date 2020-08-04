@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</loc>
+    
+    <lastmod>2020-08-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2/</loc>
     
     <lastmod>2020-08-04</lastmod>
@@ -38,6 +45,34 @@
   </url>
 
   
+  <url>
+    <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E9%93%BE%E8%A1%A8/</loc>
+    <lastmod>2020-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2020-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
