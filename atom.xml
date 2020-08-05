@@ -79,7 +79,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/</id>
     <published>2020-08-02T19:39:29.453Z</published>
-    <updated>2020-08-02T19:39:29.453Z</updated>
+    <updated>2020-08-05T00:45:48.292Z</updated>
     
     <summary type="html">
     
@@ -87,7 +87,9 @@
       
         
         
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;
+          &lt;p&gt;{return 0;}&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;#123;return 0;&amp;#125;&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token
         
       
     
@@ -102,7 +104,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</id>
     <published>2020-08-01T16:48:16.000Z</published>
-    <updated>2020-08-04T17:51:25.691Z</updated>
+    <updated>2020-08-05T00:51:03.709Z</updated>
     
     <summary type="html">
     
