@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>NiuNiu</title>
   
-  <subtitle>小马哥的技术博客</subtitle>
+  <subtitle>IT_小马哥</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/"/>
@@ -50,21 +50,6 @@
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/</id>
     <published>2020-08-04T04:37:50.000Z</published>
     <updated>2020-08-04T04:37:50.998Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>第一篇测试博客</title>
-    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/</id>
-    <published>2020-08-02T19:46:36.000Z</published>
-    <updated>2020-08-02T19:46:36.374Z</updated>
     
     <summary type="html">
     
