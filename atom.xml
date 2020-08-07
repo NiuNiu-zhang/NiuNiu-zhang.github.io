@@ -32,21 +32,6 @@
   </entry>
   
   <entry>
-    <title>线程-linux</title>
-    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E7%BA%BF%E7%A8%8B-linux/"/>
-    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E7%BA%BF%E7%A8%8B-linux/</id>
-    <published>2020-08-07T07:47:14.000Z</published>
-    <updated>2020-08-07T07:47:14.663Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>网络编程传输协议详解</title>
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/</id>
@@ -84,6 +69,33 @@
     </summary>
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>线程-linux</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/</id>
+    <published>2020-08-05T07:47:14.000Z</published>
+    <updated>2020-08-07T09:38:33.504Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h4 id=&quot;线程–轻量级进程-内核调度的最小单元&quot;&gt;&lt;a href=&quot;#线程–轻量级进程-内核调度的最小单元&quot; class=&quot;headerlink&quot; title=&quot;线程–轻量级进程   //  内核调度的最小单元&quot;&gt;&lt;/a&gt;线程–轻量级进程   // 
+        
+      
+    
+    </summary>
+    
+    
+      <category term="多进程/线程" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E5%A4%9A%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+      <category term="线程" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   

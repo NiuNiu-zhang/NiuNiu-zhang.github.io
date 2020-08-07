@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>stm32-port1 | NiuNiu</title>
+  <title>线程-linux | NiuNiu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="NiuNiu,NiuNiu's Blog" />
   
-  <meta name="description" content="NiuNiu的学习博客">
+  <meta name="description" content="线程–轻量级进程   &#x2F;&#x2F;  内核调度的最小单元为了进一步减少处理器的空转时间，支持多处理器，减少上下文切换开销 上下文切换：指的是内核（操作系统的核心）在CPU上对进程或者线程进行切换，上下文切换过程中的信息被保存在进程控制块（PCB-Process Control Block）中 过程： &#96; [1]先挂起一个进程，把这个进程在cpu中的状态（上下文信息）存储在内存的 PCB 中  [2]在PC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="stm32-port1">
-<meta property="og:url" content="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/index.html">
+<meta property="og:title" content="线程-linux">
+<meta property="og:url" content="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/index.html">
 <meta property="og:site_name" content="NiuNiu">
-<meta property="og:description" content="NiuNiu的学习博客">
+<meta property="og:description" content="线程–轻量级进程   &#x2F;&#x2F;  内核调度的最小单元为了进一步减少处理器的空转时间，支持多处理器，减少上下文切换开销 上下文切换：指的是内核（操作系统的核心）在CPU上对进程或者线程进行切换，上下文切换过程中的信息被保存在进程控制块（PCB-Process Control Block）中 过程： &#96; [1]先挂起一个进程，把这个进程在cpu中的状态（上下文信息）存储在内存的 PCB 中  [2]在PC">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-04T04:37:50.000Z">
-<meta property="article:modified_time" content="2020-08-04T04:37:50.998Z">
+<meta property="og:image" content="https://github.com/images/pthread.png">
+<meta property="article:published_time" content="2020-08-05T07:47:14.000Z">
+<meta property="article:modified_time" content="2020-08-07T09:38:33.504Z">
 <meta property="article:author" content="Zhang  Hao">
+<meta property="article:tag" content="线程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/pthread.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -114,20 +117,27 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-stm32-port1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-线程-linux" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      stm32-port1
+      线程-linux
     </h1>
     <div class="post-title-bar">
       <ul>
           
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/多进程/线程/">多进程/线程</a>
+                  
+              </li>
+          
         <li>
-          <i class="fa fa-calendar"></i>  2020-08-04
+          <i class="fa fa-calendar"></i>  2020-08-05
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -143,11 +153,100 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            
+            <h4 id="线程–轻量级进程-内核调度的最小单元"><a href="#线程–轻量级进程-内核调度的最小单元" class="headerlink" title="线程–轻量级进程   //  内核调度的最小单元"></a>线程–轻量级进程   //  内核调度的最小单元</h4><p>为了进一步减少处理器的空转时间，支持多处理器，减少上下文切换开销</p>
+<p>上下文切换：指的是内核（操作系统的核心）在CPU上对进程或者线程进行切换，上下文切换过程中的信息被保存在进程控制块（PCB-Process Control Block）中</p>
+<p>过程：</p>
+<p>`</p>
+<pre><code>[1]先挂起一个进程，把这个进程在cpu中的状态（上下文信息）存储在内存的 PCB 中
+
+[2]在PCB中检索下一个进程的上下文并将其在CPU的寄存器中恢复
+
+[3]跳转到程序计数器所指向的位置（即跳转到进程被中断时的代码行）并恢复该进程`</code></pre>
+<p>linux中的线程依赖于  pthread 线程库</p>
+<p>1、创建线程： <code>pthread_create( pthread_t  * thread, pthread_attr_t *attr,void *( *start_routine)(void *), void * arg);</code></p>
+<p>thread:    线程标识符</p>
+<p>attr: 线程属性设置，  NULL 表示缺省属性</p>
+<p>start_routine: 线程执行函数，参数和返回值都是 void *</p>
+<p>arg: 传递给 线程执行函数用的参数</p>
+<p>return:  success:0   error:错误码    </p>
+<p>2、退出线程: <code> pthread_exit( void * retval );</code></p>
+<p>retval: 线程结束时的返回值， 可以通过 pthread_join() 来接收<br>//但是使用中不能用 exit 退出线程，因为一般一个进程中包含多个线程，exit的作用是使当前进程终止，进程中所以线程都会over—<br>所以退出线程用 pthread_exit() 来替代</p>
+<p>线程主动结束：可以调用 pthread_exit()</p>
+<p>一个线程终止另外一个线程： 调用  pthread_cancel() 实现<br>// 在被取消的线程内部要  先调用 pthread_setcancel() 和 pthread_setcanceltype() 设置相应的取消状态</p>
+<p>3、pthread_join()  以阻塞的方式等待 thread 指定的线程结束，函数返回时，被等待线程的资源被回收，如果线程已经结束，该函数会立即返回</p>
+<p>resutn: success:0   error:错误号</p>
+<p>函数原型：<code> pthread_ioin( pthread_t pthread, void ** thread_result );</code></p>
+<p>thread:被等待线程的标识符</p>
+<p>thread_result: 用户定义的指针，用来接收被等待线程结束时的返回值（如果返回不为NULL）</p>
+<p>**<br>为什么是二级指针：**原因：一级指针只能用来改变指向内存的值，传递的就是指针p内存的地址,所以修改它就是修改了它自己的指向;</p>
+<p>4、<code>pthread_cancel( pthread_t thread )</code></p>
+<p>thread: 要取消的线程的 标识符</p>
+<p>return:  success:0    error:错误码</p>
+<p>线程函数使用 Demo<br> // 编译的时候需要链接 pthread</p>
+<p>thread.h</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;stdlib.h&gt;</p>
+<p>#include &lt;pthread.h&gt;</p>
+<p>#define THREAD_NUM 3     // 线程数</p>
+<p>#define REPEAT_TIMES 5 //每个线程中的循环次数限制</p>
+<p>#define DELAY_TIME  6.0  //循环之间的最大时间间隔</p>
+<p>线程处理函数</p>
+<p>void * thread_function( void * arg)<br>{</p>
+<pre><code>int thread_num = (int )arg;  //线程总数
+int delay_time = 0;   //延时
+int count = 0;        //计调用次数
+printf(&quot;thread %d start!\r\n&quot;,thread_num);
+for (count=0;count&lt;REPEAT_TIMES; count++ )
+&#123;
+    delay_time = (int)( rand() * DELAY_TIME / (RAND_MAX) ) +1 ;
+    sleep( delay_time );   //随机等待1--6 s, 模拟任务完成的时间随机
+    printf(&quot;Thread %d :job %d delay = %d\r\n&quot;, thread_num,count, delay_time);
+&#125;
+printf(&quot;Thread %d is finished\r\n&quot;, thread_num);
+pthread_exit(NULL);   //任务完成自行结束</code></pre>
+<p>}</p>
+<p>main.c</p>
+<p>#include “thread.h”</p>
+<p>int main( void )<br>{</p>
+<pre><code>pthread_t thread[THREAD_NUM];  //定义存放 thread 号的类型数组
+int no = 0,res;
+void * thread_ret;
+
+srand( time( NULL ));   //埋下时间种子
+
+for( no=0; no&lt;THREAD_NUM; no++)
+&#123;
+    res = pthread_create(&amp;thread[no], NULL, thread_function, (void*)no );  //创建的时候是  pthread_t *
+    // no 标识是第几个线程
+    if ( res != 0 )  //create error
+    &#123;
+        printf(&quot;Create thread %d error\r\n&quot;, no);
+        exit(res);  // 结束进程， &lt;stdlib.h&gt; 参数不为0都异常
+    &#125;
+&#125;
+printf(&quot;Create threads success!\r\n&quot;);
+for( no=0;no&lt;THREAD_NUM;no++)
+&#123;
+    // pthread_join:  pthread_t thread
+    res = pthread_join( thread[no], &amp;thread_ret);   //阻塞式等待线程退出
+    //param_2  被等待线程结束的返回值,  void ** thread_result
+    if ( 0 == res ) //success:0   error:错误号
+    &#123;
+        printf(&quot;Thread %d joined\r\n&quot;,no);
+    &#125;
+    else
+    &#123;
+        printf(&quot;Thread %d joined failed\r\n&quot;, no);
+    &#125;
+&#125;
+return 0;</code></pre>
+<p>}</p>
+<p>运行情况：<br><img src="/images/pthread.png"></p>
+
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年08月04日 12:37</p>
-        <p>原始链接： <a class="post-url" href="/2020/08/04/stm32-port1/" title="stm32-port1">https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/</a></p>
+        <p>最后更新： 2020年08月07日 17:38</p>
+        <p>原始链接： <a class="post-url" href="/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/" title="线程-linux">https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/</a></p>
         <footer>
             <a href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io">
                 <img src="/images/logo.png" alt="Zhang  Hao">
@@ -204,7 +303,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/&title=《stm32-port1》 — NiuNiu&pic=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.ioimages/logo.png" rel="external nofollow noreferrer" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/&title=《线程-linux》 — NiuNiu&pic=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.ioimages/logo.png" rel="external nofollow noreferrer" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -214,22 +313,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/&title=《stm32-port1》 — NiuNiu&source=NiuNiu的学习博客" rel="external nofollow noreferrer" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/&title=《线程-linux》 — NiuNiu&source=NiuNiu的学习博客" rel="external nofollow noreferrer" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/" rel="external nofollow noreferrer" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/" rel="external nofollow noreferrer" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《stm32-port1》 — NiuNiu&url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/&via=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io" rel="external nofollow noreferrer" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线程-linux》 — NiuNiu&url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/&via=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io" rel="external nofollow noreferrer" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/" rel="external nofollow noreferrer" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/" rel="external nofollow noreferrer" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -239,7 +338,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" rel="external nofollow noreferrer" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/stm32-port1/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -248,6 +347,13 @@
         <ul class="article-footer-menu">
             
             
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/线程/" class="color3">线程</a>
+      
+  </li>
+
         </ul>
         
     </footer>
@@ -255,22 +361,28 @@
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BA%BF%E7%A8%8B%E2%80%93%E8%BD%BB%E9%87%8F%E7%BA%A7%E8%BF%9B%E7%A8%8B-%E5%86%85%E6%A0%B8%E8%B0%83%E5%BA%A6%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8D%95%E5%85%83"><span class="post-toc-text">线程–轻量级进程   &#x2F;&#x2F;  内核调度的最小单元</span></a></li></ol>
+        </nav>
+    </aside>
+    
 
 <nav id="article-nav">
   
-    <a href="/2020/08/04/%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/08/07/%E8%AF%BA%E7%93%A62020%E6%8F%90%E5%89%8D%E6%89%B9%E7%AC%94%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
 
       <span class="article-nav-title">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
         
-          进制间转换
+          诺瓦2020提前批笔试
         
       </span>
     </a>
   
   
-    <a href="/2020/08/03/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Hello World</span>
+    <a href="/2020/08/04/%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">进制间转换</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   

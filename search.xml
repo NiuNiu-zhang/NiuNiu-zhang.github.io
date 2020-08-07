@@ -17,19 +17,6 @@
     
     
     <entry>
-      <title>线程-linux</title>
-      <link href="/2020/08/07/%E7%BA%BF%E7%A8%8B-linux/"/>
-      <url>/2020/08/07/%E7%BA%BF%E7%A8%8B-linux/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>网络编程传输协议详解</title>
       <link href="/2020/08/07/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"/>
       <url>/2020/08/07/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/</url>
@@ -50,6 +37,31 @@
         <content type="html"><![CDATA[<pre><code>int main()&#123;    int x = 0;    return 0;&#125;</code></pre>]]></content>
       
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>线程-linux</title>
+      <link href="/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/"/>
+      <url>/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/</url>
+      
+        <content type="html"><![CDATA[<h4 id="线程–轻量级进程-内核调度的最小单元"><a href="#线程–轻量级进程-内核调度的最小单元" class="headerlink" title="线程–轻量级进程   //  内核调度的最小单元"></a>线程–轻量级进程   //  内核调度的最小单元</h4><p>为了进一步减少处理器的空转时间，支持多处理器，减少上下文切换开销</p><p>上下文切换：指的是内核（操作系统的核心）在CPU上对进程或者线程进行切换，上下文切换过程中的信息被保存在进程控制块（PCB-Process Control Block）中</p><p>过程：</p><p>`</p><pre><code>[1]先挂起一个进程，把这个进程在cpu中的状态（上下文信息）存储在内存的 PCB 中[2]在PCB中检索下一个进程的上下文并将其在CPU的寄存器中恢复[3]跳转到程序计数器所指向的位置（即跳转到进程被中断时的代码行）并恢复该进程`</code></pre><p>linux中的线程依赖于  pthread 线程库</p><p>1、创建线程： <code>pthread_create( pthread_t  * thread, pthread_attr_t *attr,void *( *start_routine)(void *), void * arg);</code></p><p>thread:    线程标识符</p><p>attr: 线程属性设置，  NULL 表示缺省属性</p><p>start_routine: 线程执行函数，参数和返回值都是 void *</p><p>arg: 传递给 线程执行函数用的参数</p><p>return:  success:0   error:错误码    </p><p>2、退出线程: <code> pthread_exit( void * retval );</code></p><p>retval: 线程结束时的返回值， 可以通过 pthread_join() 来接收<br>//但是使用中不能用 exit 退出线程，因为一般一个进程中包含多个线程，exit的作用是使当前进程终止，进程中所以线程都会over—<br>所以退出线程用 pthread_exit() 来替代</p><p>线程主动结束：可以调用 pthread_exit()</p><p>一个线程终止另外一个线程： 调用  pthread_cancel() 实现<br>// 在被取消的线程内部要  先调用 pthread_setcancel() 和 pthread_setcanceltype() 设置相应的取消状态</p><p>3、pthread_join()  以阻塞的方式等待 thread 指定的线程结束，函数返回时，被等待线程的资源被回收，如果线程已经结束，该函数会立即返回</p><p>resutn: success:0   error:错误号</p><p>函数原型：<code> pthread_ioin( pthread_t pthread, void ** thread_result );</code></p><p>thread:被等待线程的标识符</p><p>thread_result: 用户定义的指针，用来接收被等待线程结束时的返回值（如果返回不为NULL）</p><p>**<br>为什么是二级指针：**原因：一级指针只能用来改变指向内存的值，传递的就是指针p内存的地址,所以修改它就是修改了它自己的指向;</p><p>4、<code>pthread_cancel( pthread_t thread )</code></p><p>thread: 要取消的线程的 标识符</p><p>return:  success:0    error:错误码</p><p>线程函数使用 Demo<br> // 编译的时候需要链接 pthread</p><p>thread.h</p><p>#include &lt;stdio.h&gt;</p><p>#include &lt;stdlib.h&gt;</p><p>#include &lt;pthread.h&gt;</p><p>#define THREAD_NUM 3     // 线程数</p><p>#define REPEAT_TIMES 5 //每个线程中的循环次数限制</p><p>#define DELAY_TIME  6.0  //循环之间的最大时间间隔</p><p>线程处理函数</p><p>void * thread_function( void * arg)<br>{</p><pre><code>int thread_num = (int )arg;  //线程总数int delay_time = 0;   //延时int count = 0;        //计调用次数printf(&quot;thread %d start!\r\n&quot;,thread_num);for (count=0;count&lt;REPEAT_TIMES; count++ )&#123;    delay_time = (int)( rand() * DELAY_TIME / (RAND_MAX) ) +1 ;    sleep( delay_time );   //随机等待1--6 s, 模拟任务完成的时间随机    printf(&quot;Thread %d :job %d delay = %d\r\n&quot;, thread_num,count, delay_time);&#125;printf(&quot;Thread %d is finished\r\n&quot;, thread_num);pthread_exit(NULL);   //任务完成自行结束</code></pre><p>}</p><p>main.c</p><p>#include “thread.h”</p><p>int main( void )<br>{</p><pre><code>pthread_t thread[THREAD_NUM];  //定义存放 thread 号的类型数组int no = 0,res;void * thread_ret;srand( time( NULL ));   //埋下时间种子for( no=0; no&lt;THREAD_NUM; no++)&#123;    res = pthread_create(&amp;thread[no], NULL, thread_function, (void*)no );  //创建的时候是  pthread_t *    // no 标识是第几个线程    if ( res != 0 )  //create error    &#123;        printf(&quot;Create thread %d error\r\n&quot;, no);        exit(res);  // 结束进程， &lt;stdlib.h&gt; 参数不为0都异常    &#125;&#125;printf(&quot;Create threads success!\r\n&quot;);for( no=0;no&lt;THREAD_NUM;no++)&#123;    // pthread_join:  pthread_t thread    res = pthread_join( thread[no], &amp;thread_ret);   //阻塞式等待线程退出    //param_2  被等待线程结束的返回值,  void ** thread_result    if ( 0 == res ) //success:0   error:错误号    &#123;        printf(&quot;Thread %d joined\r\n&quot;,no);    &#125;    else    &#123;        printf(&quot;Thread %d joined failed\r\n&quot;, no);    &#125;&#125;return 0;</code></pre><p>}</p><p>运行情况：<br><img src="/images/pthread.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 多进程/线程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 线程 </tag>
+            
+        </tags>
       
     </entry>
     
