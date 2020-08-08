@@ -1,107 +1,157 @@
 <!DOCTYPE html>
-
-
-<html lang="zh-CN">
-
-
+<html>
 <head>
-  <meta charset="utf-8" />
-    
-  <meta name="description" content="NiuNiu的学习博客" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>
-    单向不循环链表 |  NiuNiu的学习博客
-  </title>
-  <meta name="generator" content="hexo-theme-ayer">
+  <title>单向不循环链表 | NiuNiu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="keywords" content="NiuNiu,NiuNiu's Blog" />
+  
+  <meta name="description" content="链表： 动态的数据结构，分为数据域和指针域， 动态进行存储分配，实现数据增删 优点： ​        1、存储空间动态分配，可以根据实际需要使用 ​        2、不需要地址连续的存储空间 ​        3、插入&#x2F;删除操作只需通过修改指针实现，不必移动数据元素， 操作时间效率高 ，插入删除事件复杂度 O(1) 缺点： ​        1、每个链节点需要设置指针域（ 存储密度小 ） ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单向不循环链表">
+<meta property="og:url" content="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="NiuNiu">
+<meta property="og:description" content="链表： 动态的数据结构，分为数据域和指针域， 动态进行存储分配，实现数据增删 优点： ​        1、存储空间动态分配，可以根据实际需要使用 ​        2、不需要地址连续的存储空间 ​        3、插入&#x2F;删除操作只需通过修改指针实现，不必移动数据元素， 操作时间效率高 ，插入删除事件复杂度 O(1) 缺点： ​        1、每个链节点需要设置指针域（ 存储密度小 ） ​">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-01T16:48:16.000Z">
+<meta property="article:modified_time" content="2020-08-07T09:58:15.778Z">
+<meta property="article:author" content="Zhang  Hao">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary">
   
   
-<link rel="stylesheet" href="/dist/main.css">
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
 
   
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+<script src="/js/pace.min.js"></script>
 
   
-<link rel="stylesheet" href="/css/custom.css">
-
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
 
   
   
 
-  
-
-<link rel="alternate" href="/atom.xml" title="NiuNiu" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
-
-</html>
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="NiuNiu" type="application/atom+xml">
+</head>
 
 <body>
-  <div id="app">
-    
-      
-    <main class="content on">
-      <section class="outer">
-  <article
-  id="post-单向不循环链表"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">NiuNiu&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        NiuNiu&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注于技术分享和经验归纳的博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="NiuNiu" target="_blank" href="//niuniu-zhang.top">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NiuNiu">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" ">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" ">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-单向不循环链表" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  单向不循环链表
-</h1>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" class="article-date">
-  <time datetime="2020-08-01T16:48:16.000Z" itemprop="datePublished">2020-08-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-  </div>
+      <header class="article-header">
+        
   
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.1k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
-        </span>
-    </span>
-</div>
- 
+    <h1 class="post-title" itemprop="name">
+      单向不循环链表
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/数据结构/">数据结构</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-08-02
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
     </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
   
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>链表：</p>
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>链表：</p>
 <p>动态的数据结构，分为数据域和指针域， 动态进行存储分配，实现数据增删</p>
 <p>优点：</p>
 <p>​        1、存储空间动态分配，可以根据实际需要使用</p>
@@ -111,783 +161,306 @@
 <p>​        1、每个链节点需要设置指针域（ 存储密度小 ）</p>
 <p>​        2、是一种非随机存储结构，查找/定位等操作都需要顺序扫描链表实现，时间效率低 O(n)</p>
 <p>[TOC]</p>
-<h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
-    头节点:数据域为空
-    头节点:数据域为空
-    malloc 申请    &lt;malloc.h>
-    memset 初始化  &lt;string.h>
-*/</span>
+<h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    头节点:数据域为空</span></span><br><span class="line"><span class="comment">    头节点:数据域为空</span></span><br><span class="line"><span class="comment">    malloc 申请    &lt;malloc.h&gt;</span></span><br><span class="line"><span class="comment">    memset 初始化  &lt;string.h&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">int</span>  datatype;    </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">link</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    datatype data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">link</span> * <span class="title">pNext</span>;</span></span><br><span class="line">&#125;Link;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 枚举   中间用,    未赋值默认第一个为0</span></span><br><span class="line"><span class="keyword">enum</span> opt</span><br><span class="line">&#123;</span><br><span class="line">    ERR=<span class="number">-1</span>,</span><br><span class="line">    OK,</span><br><span class="line">    TAIL=<span class="number">-1</span>,</span><br><span class="line">    HEAD,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// [1]创建链表---即生成头节点</span></span><br><span class="line"></span><br><span class="line"><span class="function">Link * <span class="title">createLink</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">Link * <span class="title">createLink</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Link * pHead =<span class="literal">NULL</span>;</span><br><span class="line">    pHead=(Link *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Link));</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">memset</span>(pHead,<span class="string">&#x27;\0&#x27;</span>,<span class="keyword">sizeof</span>(Link));</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span> pHead;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [2]插入节点---头插，尾插，中间插</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//根据位置给链表添加节点</span></span><br><span class="line"><span class="comment">//参数：链表首地址，要添加的元素，和插入的位置</span></span><br><span class="line"><span class="comment">//HEAD=0 TAIL=-1  其他中间</span></span><br><span class="line"><span class="comment">//返回值   成功 OK 失败 ERR</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InsertLink</span><span class="params">(Link * pHead, datatype item,<span class="keyword">int</span> offset)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InsertLink</span><span class="params">(Link * pHead, datatype item,<span class="keyword">int</span> offset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERR;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    Link * pNew=<span class="literal">NULL</span>;</span><br><span class="line">    Link * pTmp=pHead;  <span class="comment">//如果写pHead-&gt;pNext要判断是否为空所以为了方便写pHead</span></span><br><span class="line">    pNew=(Link *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Link));</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pNew)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pNew-&gt;data=item;</span><br><span class="line">    pNew-&gt;pNext=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(offset)</span><br><span class="line">    &#123;</span><br><span class="line"><span class="keyword">case</span> HEAD:</span><br><span class="line">        pNew-&gt;pNext=pHead-&gt;pNext;</span><br><span class="line">        pHead-&gt;pNext=pNew;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> TAIL:</span><br><span class="line">        <span class="keyword">while</span>(pTmp-&gt;pNext!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            pTmp=pTmp-&gt;pNext;</span><br><span class="line">        &#125;</span><br><span class="line">        pTmp-&gt;pNext=pNew;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">while</span>(k &lt; offset<span class="number">-1</span> &amp;&amp; pTmp != <span class="literal">NULL</span>) <span class="comment">//pTmp!=NULL说明找到插入位置，如果pTmp==NULL,表示未找到要free(pNew)再返回报错</span></span><br><span class="line">        &#123;</span><br><span class="line">            k++;</span><br><span class="line">            pTmp=pTmp-&gt;pNext;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pTmp==<span class="literal">NULL</span>) <span class="comment">//先判断是否为空</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">free</span>(pNew);</span><br><span class="line">            <span class="keyword">return</span> ERR;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        pNew-&gt;pNext=pTmp-&gt;pNext;</span><br><span class="line">        pTmp-&gt;pNext=pNew;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [3]打印输出---遍历</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">(Link * pHead)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">(Link * pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERR;</span><br><span class="line">    &#125;</span><br><span class="line">    Link * pTmp=pHead-&gt;pNext;</span><br><span class="line">    <span class="keyword">while</span>(pTmp!=<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,pTmp-&gt;data);</span><br><span class="line">        pTmp=pTmp-&gt;pNext;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [4]删除节点----头删，尾删，中间删</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DeleteLink</span><span class="params">(Link * pHead,<span class="keyword">int</span> offset,datatype * pData)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DeleteLink</span><span class="params">(Link * pHead,<span class="keyword">int</span> offset,datatype * pData)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead||<span class="literal">NULL</span>==pData)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERR;</span><br><span class="line">    &#125;</span><br><span class="line">    Link * pDel=<span class="literal">NULL</span>;</span><br><span class="line">    Link * pPre=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">switch</span>(offset)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> HEAD:</span><br><span class="line">        pDel=pHead-&gt;pNext;</span><br><span class="line">        <span class="keyword">if</span>(pDel==<span class="literal">NULL</span>)          <span class="comment">//一定要判断</span></span><br><span class="line">        &#123;</span><br><span class="line">            *pData=<span class="number">0</span>;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;链表为空！\n&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> ERR;</span><br><span class="line">        &#125;</span><br><span class="line">        pHead-&gt;pNext=pDel-&gt;pNext;</span><br><span class="line">        <span class="comment">//先将删除的数保存</span></span><br><span class="line">        *pData=pDel-&gt;data;</span><br><span class="line">        <span class="built_in">free</span>(pDel);</span><br><span class="line">        pDel=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> TAIL:</span><br><span class="line">        pPre=pHead;</span><br><span class="line">        pDel=pHead-&gt;pNext;</span><br><span class="line">        <span class="keyword">if</span>(pDel==<span class="literal">NULL</span>)   <span class="comment">//说明没有什么删除的，空链表是pHead-&gt;pNext为空</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;链表为空!\n&quot;</span>);</span><br><span class="line">            *pData=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> ERR;</span><br><span class="line">            <span class="keyword">while</span>(pDel-&gt;pNext!=<span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                pPre=pDel;</span><br><span class="line">                pDel=pDel-&gt;pNext;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//保存删除的数据v</span></span><br><span class="line">             *pData=pDel-&gt;data;</span><br><span class="line"></span><br><span class="line">             <span class="built_in">free</span>(pDel);</span><br><span class="line">             pDel=<span class="literal">NULL</span>;</span><br><span class="line">             <span class="comment">//把pre变成尾节点</span></span><br><span class="line">             pPre-&gt;pNext=<span class="literal">NULL</span>;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        pPre=pHead;</span><br><span class="line">        pDel=pHead-&gt;pNext;</span><br><span class="line">        k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(k&lt;offset<span class="number">-1</span>&amp;&amp;pDel!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            k++;</span><br><span class="line">            pPre=pDel;          <span class="comment">//是pPre=pDel;;</span></span><br><span class="line">            pDel=pDel-&gt;pNext;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pDel==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;链表为空!\n&quot;</span>);</span><br><span class="line">            *pData=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> ERR;</span><br><span class="line">        &#125;</span><br><span class="line">        *pData=pDel-&gt;data;</span><br><span class="line">        pPre-&gt;pNext=pDel-&gt;pNext;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">free</span>(pDel);</span><br><span class="line">        pDel=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [5]销毁链表</span></span><br><span class="line"></span><br><span class="line"><span class="function">Link * <span class="title">Destroy</span><span class="params">(Link * pHead)</span></span>;</span><br><span class="line"><span class="function">Link * <span class="title">Destroy</span><span class="params">(Link * pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Link * pDel=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//while(pDel!=NULL)                  //while(1)是死循环  永远成立；</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;<span class="comment">//找到链表中的首节点</span></span><br><span class="line">        pDel=pHead-&gt;pNext;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(pDel==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;    </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//保护好首节点后的所有节点</span></span><br><span class="line">        pHead-&gt;pNext=pDel-&gt;pNext;</span><br><span class="line">        <span class="comment">//释放首节点</span></span><br><span class="line">        <span class="built_in">free</span>(pDel);</span><br><span class="line">        pDel=<span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后再释放头节点</span></span><br><span class="line">        <span class="built_in">free</span>(pHead);</span><br><span class="line">        pHead=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;链表已删除\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> pHead;   <span class="comment">//一定要返回  pHead  否则会错误</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [6]链表逆序---拓展</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Negative</span><span class="params">(Link * pHead)</span></span>;    <span class="comment">//Negative sequence  逆序</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Negative</span><span class="params">(Link * pHead)</span>    <span class="comment">//Negative sequence  逆序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span>==pHead)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ERR;</span><br><span class="line">    &#125;</span><br><span class="line">    Link * pA=<span class="literal">NULL</span>;</span><br><span class="line">    Link * pB=<span class="literal">NULL</span>;</span><br><span class="line">    pA=pHead-&gt;pNext;   <span class="comment">//保护好头节点后的所有节点</span></span><br><span class="line">    <span class="comment">//原链表变为空链表</span></span><br><span class="line">    pHead-&gt;pNext=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">//保护好首节点后的所有节点</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pB=pA-&gt;pNext;</span><br><span class="line">        <span class="comment">//首节点插入到新链表</span></span><br><span class="line">        pA-&gt;pNext=pHead-&gt;pNext;</span><br><span class="line">        pHead-&gt;pNext=pA;</span><br><span class="line">        pA=pB;</span><br><span class="line">        <span class="keyword">if</span>(pA==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">typedef</span>  <span class="token keyword">int</span>  datatype<span class="token punctuation">;</span>    
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> link
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    datatype data<span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> link <span class="token operator">*</span> pNext<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>Link<span class="token punctuation">;</span>
+<h5 id="test"><a href="#test" class="headerlink" title="test"></a>test</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<span class="token comment" spellcheck="true">// 枚举   中间用,    未赋值默认第一个为0</span>
-<span class="token keyword">enum</span> opt
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    ERR<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>
-    OK<span class="token punctuation">,</span>
-    TAIL<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>
-    HEAD<span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-
-<span class="token comment" spellcheck="true">// [1]创建链表---即生成头节点</span>
-
-Link <span class="token operator">*</span> <span class="token function">createLink</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-Link <span class="token operator">*</span> <span class="token function">createLink</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pHead <span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    pHead<span class="token operator">=</span><span class="token punctuation">(</span>Link <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Link<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token function">memset</span><span class="token punctuation">(</span>pHead<span class="token punctuation">,</span><span class="token string">'\0'</span><span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Link<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">return</span> pHead<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// [2]插入节点---头插，尾插，中间插</span>
-
-<span class="token comment" spellcheck="true">//根据位置给链表添加节点</span>
-<span class="token comment" spellcheck="true">//参数：链表首地址，要添加的元素，和插入的位置</span>
-<span class="token comment" spellcheck="true">//HEAD=0 TAIL=-1  其他中间</span>
-<span class="token comment" spellcheck="true">//返回值   成功 OK 失败 ERR</span>
-<span class="token keyword">int</span> <span class="token function">InsertLink</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">,</span> datatype item<span class="token punctuation">,</span><span class="token keyword">int</span> offset<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">InsertLink</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">,</span> datatype item<span class="token punctuation">,</span><span class="token keyword">int</span> offset<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pNew<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pTmp<span class="token operator">=</span>pHead<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//如果写pHead->pNext要判断是否为空所以为了方便写pHead</span>
-    pNew<span class="token operator">=</span><span class="token punctuation">(</span>Link <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Link<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pNew<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-    pNew<span class="token operator">-></span>data<span class="token operator">=</span>item<span class="token punctuation">;</span>
-    pNew<span class="token operator">-></span>pNext<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">switch</span><span class="token punctuation">(</span>offset<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-<span class="token keyword">case</span> HEAD<span class="token punctuation">:</span>
-        pNew<span class="token operator">-></span>pNext<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        pHead<span class="token operator">-></span>pNext<span class="token operator">=</span>pNew<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-<span class="token keyword">case</span> TAIL<span class="token punctuation">:</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>pTmp<span class="token operator">-></span>pNext<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            pTmp<span class="token operator">=</span>pTmp<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        pTmp<span class="token operator">-></span>pNext<span class="token operator">=</span>pNew<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-
-<span class="token keyword">default</span><span class="token punctuation">:</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>k <span class="token operator">&lt;</span> offset<span class="token number">-1</span> <span class="token operator">&amp;&amp;</span> pTmp <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//pTmp!=NULL说明找到插入位置，如果pTmp==NULL,表示未找到要free(pNew)再返回报错</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            k<span class="token operator">++</span><span class="token punctuation">;</span>
-            pTmp<span class="token operator">=</span>pTmp<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pTmp<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//先判断是否为空</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token function">free</span><span class="token punctuation">(</span>pNew<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        pNew<span class="token operator">-></span>pNext<span class="token operator">=</span>pTmp<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        pTmp<span class="token operator">-></span>pNext<span class="token operator">=</span>pNew<span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// [3]打印输出---遍历</span>
-
-<span class="token keyword">int</span> <span class="token function">show</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">show</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pTmp<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>pTmp<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" %d "</span><span class="token punctuation">,</span>pTmp<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        pTmp<span class="token operator">=</span>pTmp<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// [4]删除节点----头删，尾删，中间删</span>
-
-<span class="token keyword">int</span> <span class="token function">DeleteLink</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">,</span><span class="token keyword">int</span> offset<span class="token punctuation">,</span>datatype <span class="token operator">*</span> pData<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">DeleteLink</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">,</span><span class="token keyword">int</span> offset<span class="token punctuation">,</span>datatype <span class="token operator">*</span> pData<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token operator">||</span><span class="token constant">NULL</span><span class="token operator">==</span>pData<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pPre<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">switch</span><span class="token punctuation">(</span>offset<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> HEAD<span class="token punctuation">:</span>
-        pDel<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pDel<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>          <span class="token comment" spellcheck="true">//一定要判断</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token operator">*</span>pData<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"链表为空！\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        pHead<span class="token operator">-></span>pNext<span class="token operator">=</span>pDel<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//先将删除的数保存</span>
-        <span class="token operator">*</span>pData<span class="token operator">=</span>pDel<span class="token operator">-></span>data<span class="token punctuation">;</span>
-        <span class="token function">free</span><span class="token punctuation">(</span>pDel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> TAIL<span class="token punctuation">:</span>
-        pPre<span class="token operator">=</span>pHead<span class="token punctuation">;</span>
-        pDel<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pDel<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">//说明没有什么删除的，空链表是pHead->pNext为空</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"链表为空!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">*</span>pData<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-            <span class="token keyword">while</span><span class="token punctuation">(</span>pDel<span class="token operator">-></span>pNext<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                pPre<span class="token operator">=</span>pDel<span class="token punctuation">;</span>
-                pDel<span class="token operator">=</span>pDel<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//保存删除的数据v</span>
-             <span class="token operator">*</span>pData<span class="token operator">=</span>pDel<span class="token operator">-></span>data<span class="token punctuation">;</span>
-
-             <span class="token function">free</span><span class="token punctuation">(</span>pDel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-             pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-             <span class="token comment" spellcheck="true">//把pre变成尾节点</span>
-             pPre<span class="token operator">-></span>pNext<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-             <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">default</span><span class="token punctuation">:</span>
-        pPre<span class="token operator">=</span>pHead<span class="token punctuation">;</span>
-        pDel<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>k<span class="token operator">&lt;</span>offset<span class="token number">-1</span><span class="token operator">&amp;&amp;</span>pDel<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            k<span class="token operator">++</span><span class="token punctuation">;</span>
-            pPre<span class="token operator">=</span>pDel<span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">//是pPre=pDel;;</span>
-            pDel<span class="token operator">=</span>pDel<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pDel<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"链表为空!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">*</span>pData<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">*</span>pData<span class="token operator">=</span>pDel<span class="token operator">-></span>data<span class="token punctuation">;</span>
-        pPre<span class="token operator">-></span>pNext<span class="token operator">=</span>pDel<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-
-        <span class="token function">free</span><span class="token punctuation">(</span>pDel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// [5]销毁链表</span>
-
-Link <span class="token operator">*</span> <span class="token function">Destroy</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span><span class="token punctuation">;</span>
-Link <span class="token operator">*</span> <span class="token function">Destroy</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">//while(pDel!=NULL)                  //while(1)是死循环  永远成立；</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//找到链表中的首节点</span>
-        pDel<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pDel<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>    
-            <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//保护好首节点后的所有节点</span>
-        pHead<span class="token operator">-></span>pNext<span class="token operator">=</span>pDel<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//释放首节点</span>
-        <span class="token function">free</span><span class="token punctuation">(</span>pDel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        pDel<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//最后再释放头节点</span>
-        <span class="token function">free</span><span class="token punctuation">(</span>pHead<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        pHead<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"链表已删除\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> pHead<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//一定要返回  pHead  否则会错误</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// [6]链表逆序---拓展</span>
-
-<span class="token keyword">int</span> <span class="token function">Negative</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//Negative sequence  逆序</span>
-<span class="token keyword">int</span> <span class="token function">Negative</span><span class="token punctuation">(</span>Link <span class="token operator">*</span> pHead<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//Negative sequence  逆序</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token operator">==</span>pHead<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ERR<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pA<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Link <span class="token operator">*</span> pB<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    pA<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//保护好头节点后的所有节点</span>
-    <span class="token comment" spellcheck="true">//原链表变为空链表</span>
-    pHead<span class="token operator">-></span>pNext<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//保护好首节点后的所有节点</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        pB<span class="token operator">=</span>pA<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//首节点插入到新链表</span>
-        pA<span class="token operator">-></span>pNext<span class="token operator">=</span>pHead<span class="token operator">-></span>pNext<span class="token punctuation">;</span>
-        pHead<span class="token operator">-></span>pNext<span class="token operator">=</span>pA<span class="token punctuation">;</span>
-        pA<span class="token operator">=</span>pB<span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>pA<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-
-
-
-
-</code></pre>
-<h5 id="test"><a href="#test" class="headerlink" title="test"></a>test</h5><pre class=" language-java"><code class="language-java"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p><code>int main()</code></p>
- 
-      <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          打赏
-        </div>
-      </div>
-      
-    </div>
-    
 
-    <!-- copyright -->
-    
-    <div class="declare">
-      <ul class="post-copyright">
-        <li>
-          <i class="ri-copyright-line"></i>
-          <strong>版权声明： </strong>
-          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
-        </li>
-      </ul>
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年08月07日 17:58</p>
+        <p>原始链接： <a class="post-url" href="/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" title="单向不循环链表">https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/</a></p>
+        <footer>
+            <a href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io">
+                <img src="/images/logo.png" alt="Zhang  Hao">
+                Zhang  Hao
+            </a>
+        </footer>
     </div>
-    
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" rel="external nofollow noreferrer">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" rel="external nofollow noreferrer" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/vx.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/vx.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/zfb.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
     <footer class="article-footer">
-       
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" rel="external nofollow noreferrer" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" rel="external nofollow noreferrer" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
+        
+        
+<div class="post-share">
+    <a href="javascript:;" rel="external nofollow noreferrer" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/&title=《单向不循环链表》 — NiuNiu&pic=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.ioimages/logo.png" rel="external nofollow noreferrer" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" rel="external nofollow noreferrer" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/&title=《单向不循环链表》 — NiuNiu&source=NiuNiu的学习博客" rel="external nofollow noreferrer" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="external nofollow noreferrer" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《单向不循环链表》 — NiuNiu&url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/&via=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io" rel="external nofollow noreferrer" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" rel="external nofollow noreferrer" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
 </div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;" rel="external nofollow noreferrer"><i class="ri-close-circle-line"></i></a>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" rel="external nofollow noreferrer" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" alt="微信分享二维码">
-    </div>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/02/%E5%8D%95%E5%90%91%E4%B8%8D%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" alt="微信分享二维码">
 </div>
 
-<div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li></ul>
+<div class="mask"></div>
 
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/链表/" class="color3">链表</a>
+      
+  </li>
+
+        </ul>
+        
     </footer>
   </div>
-
-   
-  <nav class="article-nav">
-    
-      <a href="/2020/08/03/hello-world/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Hello World
-          
-        </div>
-      </a>
-    
-    
-  </nav>
-
-   
-<!-- valine评论 -->
-<div id="vcomments-box">
-  <div id="vcomments"></div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<script>
-  new Valine({
-    el: "#vcomments",
-    app_id: "",
-    app_key: "",
-    path: window.location.pathname,
-    avatar: "monsterid",
-    placeholder: "给我的文章加点评论吧~",
-    recordIP: true,
-  });
-  const infoEle = document.querySelector("#vcomments .info");
-  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-    infoEle.childNodes.forEach(function (item) {
-      item.parentNode.removeChild(item);
-    });
-  }
-</script>
-<style>
-  #vcomments-box {
-    padding: 5px 30px;
-  }
-
-  @media screen and (max-width: 800px) {
-    #vcomments-box {
-      padding: 5px 0px;
-    }
-  }
-
-  #vcomments-box #vcomments {
-    background-color: #fff;
-  }
-
-  .v .vlist .vcard .vh {
-    padding-right: 20px;
-  }
-
-  .v .vlist .vcard {
-    padding-left: 10px;
-  }
-</style>
-
- 
-     
 </article>
 
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Demo"><span class="post-toc-text">Demo</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#test"><span class="post-toc-text">test</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2020/08/03/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Hello World
+        
+      </span>
+    </a>
+  
+  
+</nav>
+
+
+
+    
 </section>
-      <footer class="footer">
+        
+      </div>
+      <footer id="footer">
   <div class="outer">
-    <ul>
-      <li>
-        Copyrights &copy;
-        2015-2020
-        <i class="ri-heart-fill heart_icon"></i> Zhang  Hao
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        
-        由 <a href="https://hexo.io" rel="external nofollow noreferrer" target="_blank">Hexo</a> 强力驱动
-        <span class="division">|</span>
-        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
-</span>
-        
-      </li>
-    </ul>
-    <ul>
+    <div id="footer-info" class="inner">
       
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
-        
-      </li>
-    </ul>
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" rel="external nofollow noreferrer" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Zhang  Hao<br>
+      </p>
+    </div>
   </div>
 </footer>
-      <div class="float_btns">
-        <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-      </div>
-    </main>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="NiuNiu"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" target="_blank" rel="noopener external nofollow noreferrer" href="http://shenyu-vip.lofter.com">摄影</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <script>
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        document.querySelector('.content').classList.remove('on');
-        document.querySelector('.sidebar').classList.remove('on');
-      }
-    </script>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-<!-- Tocbot -->
-
-
-<script src="/js/tocbot.min.js"></script>
-
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: 'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto'
-  });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
-
-<script src="/dist/main.js"></script>
-
-<!-- ImageViewer -->
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
-    }
-    viewer_init()
-</script>
-
-<!-- MathJax -->
-
-<!-- Katex -->
-
-<!-- busuanzi  -->
-
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-<!-- ClickLove -->
-
-<!-- ClickBoom1 -->
-
-<!-- ClickBoom2 -->
-
-<!-- CodeCopy -->
-
-
-<link rel="stylesheet" href="/css/clipboard.css">
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
+  var mihoConfig = {
+      root: "https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
   }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
 </script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/%E5%A4%9A%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/">多进程/线程</a><a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">线程</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 20px;">链表</a>
+        </div>
+    </div>
+    <a href="javascript:;" rel="external nofollow noreferrer" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">线程</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 20px;">链表</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" rel="external nofollow noreferrer" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;" rel="external nofollow noreferrer">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
 
 
-<!-- CanvasBackground -->
+<script src="/js/main.js"></script>
 
 
-    
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
   </div>
 </body>
-
 </html>
