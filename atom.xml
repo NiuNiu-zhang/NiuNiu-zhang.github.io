@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/"/>
-  <updated>2020-08-07T07:47:39.779Z</updated>
+  <updated>2020-08-08T04:10:17.623Z</updated>
   <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>线程间同步互斥</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/</id>
+    <published>2020-08-08T02:38:51.000Z</published>
+    <updated>2020-08-08T04:10:17.623Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;由于线程共享进程的资源和地址空间，因此在对资源操作时，必须考虑到线程间资源的访问和互斥问题&lt;br&gt;是&lt;/p&gt;
+
+        
+      
+    
+    </summary>
+    
+    
+      <category term="进程线程" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+      <category term="线程通信" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>进程-linux</title>
@@ -51,7 +79,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E8%AF%BA%E7%93%A62020%E6%8F%90%E5%89%8D%E6%89%B9%E7%AC%94%E8%AF%95/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E8%AF%BA%E7%93%A62020%E6%8F%90%E5%89%8D%E6%89%B9%E7%AC%94%E8%AF%95/</id>
     <published>2020-08-07T02:21:03.000Z</published>
-    <updated>2020-08-08T00:53:58.249Z</updated>
+    <updated>2020-08-08T03:59:37.653Z</updated>
     
     <summary type="html">
     
@@ -147,7 +175,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/</id>
     <published>2020-08-02T19:39:29.453Z</published>
-    <updated>2020-08-07T06:54:22.548Z</updated>
+    <updated>2020-08-08T03:59:35.623Z</updated>
     
     <summary type="html">
     

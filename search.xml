@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>线程间同步互斥</title>
+      <link href="/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/"/>
+      <url>/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/</url>
+      
+        <content type="html"><![CDATA[<p>由于线程共享进程的资源和地址空间，因此在对资源操作时，必须考虑到线程间资源的访问和互斥问题<br>是</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 进程线程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 线程通信 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>进程-linux</title>
       <link href="/2020/08/07/%E8%BF%9B%E7%A8%8B-linux/"/>
       <url>/2020/08/07/%E8%BF%9B%E7%A8%8B-linux/</url>
@@ -116,7 +141,7 @@
       <link href="/2020/08/03/hello-world/"/>
       <url>/2020/08/03/hello-world/</url>
       
-        <content type="html"><![CDATA[<p>欢迎来到 NiuNiu 的技术经验分享博客网站<br>但凡流行的工具、技术，都是入门易，精通难，想有所成就，<br>都需要不懈的努力和漫长的积累，愿诸君与我共勉！<br>回首向来萧瑟处，归去，也无风雨也无晴<del>~</del></p>]]></content>
+        <content type="html"><![CDATA[<p>欢迎来到 NiuNiu 的技术经验分享博客网站<br>但凡流行的工具、技术，都是入门易，精通难，想有所成就，<br>都需要不懈的努力和漫长的积累，愿诸君与我共勉！<br>不缺拳打世界的勇气<br>亦有归去风雨无晴的洒脱，<del>~</del><br>-Z</p>]]></content>
       
       
       
