@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/"/>
-  <updated>2020-08-08T10:08:28.489Z</updated>
+  <updated>2020-08-10T08:33:14.219Z</updated>
   <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/</id>
   
   <author>
@@ -17,11 +17,118 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>线程间同步互斥-互斥锁</title>
+    <title>进程间通信</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/10/%E7%AE%A1%E9%81%93/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/10/%E7%AE%A1%E9%81%93/</id>
+    <published>2020-08-10T08:10:45.000Z</published>
+    <updated>2020-08-10T08:33:14.219Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Linux 进程间通讯
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="有名管道" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>生产者消费者demo-有名管道+信号量</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/10/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85demo-%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93-%E4%BF%A1%E5%8F%B7%E9%87%8F/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/10/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85demo-%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93-%E4%BF%A1%E5%8F%B7%E9%87%8F/</id>
+    <published>2020-08-10T00:57:06.000Z</published>
+    <updated>2020-08-10T08:09:32.191Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h6 id=&quot;生产者-消费者-Demo&quot;&gt;&lt;a href=&quot;#生产者-消费者-Demo&quot; class=&quot;headerlink&quot; title=&quot;生产者-消费者 Demo&quot;&gt;&lt;/a&gt;生产者-消费者 Demo&lt;/h6&gt;&lt;p&gt;相关描述：有一个有限缓冲区，（用有名管道实现 FIFO
+        
+      
+    
+    </summary>
+    
+    
+      <category term="生产者消费者demo" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85demo/"/>
+    
+    
+      <category term="有名管道，信号量" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93%EF%BC%8C%E4%BF%A1%E5%8F%B7%E9%87%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程-demo问题</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/09/%E7%BA%BF%E7%A8%8B-demo%E9%97%AE%E9%A2%98/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/09/%E7%BA%BF%E7%A8%8B-demo%E9%97%AE%E9%A2%98/</id>
+    <published>2020-08-09T09:29:28.000Z</published>
+    <updated>2020-08-10T08:09:34.176Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;src：&lt;br&gt;thread.c&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+      <category term="进程线程" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+      <category term="线程bug" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E7%BA%BF%E7%A8%8Bbug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程-信号量</title>
+    <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/09/%E7%BA%BF%E7%A8%8B-%E4%BF%A1%E5%8F%B7%E9%87%8F/"/>
+    <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/09/%E7%BA%BF%E7%A8%8B-%E4%BF%A1%E5%8F%B7%E9%87%8F/</id>
+    <published>2020-08-08T16:34:24.000Z</published>
+    <updated>2020-08-10T08:09:35.246Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;信号量就是：  （主要用于共享数据的同步访问）&lt;br&gt;操作系统中用到的 PV 原子操作，广泛应用于进程和线程间的同步和互斥&lt;br&gt;本质：是一个  非负 的整数计数器，被用来控制对公共资源的访问&lt;br&gt;PV 操作主要用于  同步  和  互斥
+        
+      
+    
+    </summary>
+    
+    
+      <category term="进程线程" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/categories/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+      <category term="信号量,生产者-消费者demo//有名管道" scheme="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F-%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85demo-%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程-互斥锁</title>
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/08/%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5/</id>
     <published>2020-08-08T02:38:51.000Z</published>
-    <updated>2020-08-08T10:08:28.489Z</updated>
+    <updated>2020-08-10T08:09:37.903Z</updated>
     
     <summary type="html">
     
@@ -79,7 +186,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E8%AF%BA%E7%93%A62020%E6%8F%90%E5%89%8D%E6%89%B9%E7%AC%94%E8%AF%95/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/07/%E8%AF%BA%E7%93%A62020%E6%8F%90%E5%89%8D%E6%89%B9%E7%AC%94%E8%AF%95/</id>
     <published>2020-08-07T02:21:03.000Z</published>
-    <updated>2020-08-08T03:59:37.653Z</updated>
+    <updated>2020-08-09T09:47:13.111Z</updated>
     
     <summary type="html">
     
@@ -105,7 +212,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/05/%E7%BA%BF%E7%A8%8B-linux/</id>
     <published>2020-08-05T07:47:14.000Z</published>
-    <updated>2020-08-07T09:38:33.504Z</updated>
+    <updated>2020-08-10T08:09:36.710Z</updated>
     
     <summary type="html">
     
@@ -132,7 +239,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/04/%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2/</id>
     <published>2020-08-04T11:08:07.000Z</published>
-    <updated>2020-08-04T16:58:12.302Z</updated>
+    <updated>2020-08-10T08:09:38.853Z</updated>
     
     <summary type="html">
     
@@ -175,7 +282,7 @@
     <link href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/"/>
     <id>https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/03/hello-world/</id>
     <published>2020-08-02T19:39:29.453Z</published>
-    <updated>2020-08-08T03:59:35.623Z</updated>
+    <updated>2020-08-10T08:09:40.010Z</updated>
     
     <summary type="html">
     
