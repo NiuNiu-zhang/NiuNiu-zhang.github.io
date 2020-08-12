@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Boa服务器和cgi | NiuNiu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="NiuNiu,NiuNiu's Blog" />
+  
+  <meta name="description" content="描述：boa是基于 http 的单任务小型服务器    大小只有 60KB 左右只能依次 完成用户的请求， 而不会 fork 出新的进程 来处理并发连接请求 CGI 只是一个进程，用来 提供接口 –&gt;自动目录生成 和 自动文件进行拼接可靠性，可移植性 服务器模型C-Sclient：张三-  id1，李四- id2server：腾讯1、先登录 输入账号密码 发送服务器验证2、向 李四 发送消息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boa服务器和cgi">
+<meta property="og:url" content="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/index.html">
+<meta property="og:site_name" content="NiuNiu">
+<meta property="og:description" content="描述：boa是基于 http 的单任务小型服务器    大小只有 60KB 左右只能依次 完成用户的请求， 而不会 fork 出新的进程 来处理并发连接请求 CGI 只是一个进程，用来 提供接口 –&gt;自动目录生成 和 自动文件进行拼接可靠性，可移植性 服务器模型C-Sclient：张三-  id1，李四- id2server：腾讯1、先登录 输入账号密码 发送服务器验证2、向 李四 发送消息">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/images/boa%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="https://github.com/images/cgi-test.png">
+<meta property="article:published_time" content="2020-08-12T10:45:48.000Z">
+<meta property="article:modified_time" content="2020-08-12T11:03:17.843Z">
+<meta property="article:author" content="Zhang  Hao">
+<meta property="article:tag" content="boa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/boa%E5%8E%9F%E7%90%86.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="NiuNiu" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">NiuNiu&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        NiuNiu&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注于技术分享和经验归纳的博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="NiuNiu" target="_blank" href="//niuniu-zhang.top">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/NiuNiu">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" ">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" ">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Boa服务器和cgi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Boa服务器和cgi
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/项目技术栈/">项目技术栈</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-08-12
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>描述：<br>boa是基于 http 的单任务小型服务器    大小只有 60KB 左右<br>只能依次 完成用户的请求， 而不会 fork 出新的进程 来处理并发连接请求</p>
+<p>CGI 只是一个进程，用来 提供接口 –&gt;自动目录生成 和 自动文件进行拼接<br>可靠性，可移植性<br><img src="/images/boa%E5%8E%9F%E7%90%86.png"></p>
+<p>服务器模型<br>C-S<br>client：张三-  id1，李四- id2<br>server：腾讯<br>1、先登录 输入账号密码 发送服务器验证<br>2、向 李四 发送消息<br>封装信息包<br>&lt;id1  数据  id2&gt;<br>3、服务器 先查找是否有  李四<br>然后把 数据包发给 李四<br>4、李四发给张三<br>&lt;id2 数据  id1&gt;</p>
+<h6 id="类比-：-lt-boa-服务器的作用-gt"><a href="#类比-：-lt-boa-服务器的作用-gt" class="headerlink" title="类比 ： &lt;boa 服务器的作用&gt;"></a>类比 ： &lt;boa 服务器的作用&gt;</h6><p>CGI—  相当于 客户端1<br>Web—相当于 客户端2<br>①查找    CGI 查找 Web<br>②把 CGI 数据提取出来—&gt;交给对应的网页—&gt;显示</p>
+<p>boa.conf  保存的配置信息是从哪里查找到 哪里显示<br>&lt;cgi.bin&gt;   <www><br>查找：写入配置文件  boa.conf<br>从 boa.bin 查找</www></p>
+<p>关闭 boa 服务器<br>先查找 进程号  ps -axj  | grep “boa”<br>kill -9  pid号<br>注意：<br>boa 模块在  该项目上层应用中 是基石组成</p>
+<h5 id="boa环境搭建和测试"><a href="#boa环境搭建和测试" class="headerlink" title="boa环境搭建和测试"></a>boa环境搭建和测试</h5><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;源码下载&gt;http:<span class="comment">//www.boa.org/   （项目版本 0.94.13）  boa-0.94.13.tar.gz</span></span><br><span class="line"><span class="symbol">cd</span> 到对应目录  解压       tar xzf boa-<span class="number">0</span>.<span class="number">94</span>.<span class="number">13</span>.tar.gz</span><br><span class="line">安装需要的工具  bison    flex</span><br><span class="line">        sudo apt-<span class="meta">get</span> update</span><br><span class="line">        sudo apt-<span class="meta">get</span> install bison flex</span><br><span class="line"> 生成 Makefile 文件</span><br><span class="line"> cd  boa-<span class="number">0</span>.<span class="number">94</span>.<span class="number">13</span>/src</span><br><span class="line"> 执行  ./configure</span><br><span class="line"> 准备工作</span><br><span class="line"> Boa 需要在 /etc 目录下建立一个  boa 目录   </span><br><span class="line">     里面存放 Boa 的主要配置文件  boa.conf  </span><br><span class="line">    新建目录 sudo mkdir /etc/boa     《在家目录下 /home/linux》</span><br><span class="line">    　　cd ~ 返回根目录</span><br><span class="line">　　    cd /etc 切换当前目录</span><br><span class="line">      sudo <span class="meta">cp</span> ~/Desktop/boa-<span class="number">0</span>.<span class="number">94</span>.<span class="number">13</span>/boa.conf boa    《复制文件boa.conf到/etc/boa目录》</span><br><span class="line">      修改  boa.conf 配置文件  《管理员身份》 sudo gedit ~/etc/boa/boa.conf </span><br><span class="line">      </span><br><span class="line">      (<span class="number">1</span>)Group的修改</span><br><span class="line">　　修改 Group nogroup</span><br><span class="line">　　为 　Group <span class="number">0</span></span><br><span class="line">　　(<span class="number">2</span>)user的修改</span><br><span class="line">　　修改 User nobody</span><br><span class="line">　　为 　User <span class="number">0</span></span><br><span class="line">　　(<span class="number">3</span>)修改ScriptAlias的路径</span><br><span class="line">　　修改ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/</span><br><span class="line">　　为 ScriptAlias /cgi-bin/ /var/www/cgi-bin/</span><br><span class="line">　　(<span class="number">4</span>)去掉ServerName前面的注释符号#</span><br><span class="line">　　修改<span class="symbol">#ServerName</span> www.your.org.here</span><br><span class="line">　　为 ServerName www.your.org.here</span><br><span class="line">　　否则会出现错误: <span class="string">&quot;gethostbyname::No such file or directory&quot;</span></span><br><span class="line">　　(<span class="number">5</span>)注释掉AccessLog命令</span><br><span class="line">　　修改AccessLog /var/log/boa/access_log</span><br><span class="line">　　为# AccessLog /var/log/boa/access_log</span><br><span class="line">　　否则会出现错误提示: <span class="string">&quot;Cannot open ... for logging:logfile open:Is a directory&quot;</span></span><br><span class="line">  </span><br><span class="line">  &lt;修改 src/compat.h&gt;</span><br><span class="line">  <span class="comment">#define TIMEZONE_OFFSET(foo) foo##-&gt;tm_gmtoff</span></span><br><span class="line">　修改成</span><br><span class="line">　<span class="symbol">#define</span> TIMEZONE_OFFSET(foo) (foo)-&gt;tm_gmtoff</span><br><span class="line">　否则会出现错误：util.c:<span class="number">100</span>:<span class="number">1</span>: error: pasting <span class="string">&quot;t&quot;</span> <span class="keyword">and</span> <span class="string">&quot;-&gt;&quot;</span> does not give a valid preprocessing token make: *** [util.o] 错误 <span class="number">1</span></span><br><span class="line">  </span><br><span class="line">  &lt;修改 src/log.c&gt;</span><br><span class="line">  <span class="meta">if</span> (dup2(error_log, STDERR_FILENO) == -<span class="number">1</span>) &#123;</span><br><span class="line">　　DIE(<span class="string">&quot;unable to dup2 the error log&quot;</span>)<span class="comment">;</span></span><br><span class="line">　　&#125;</span><br><span class="line">　　修改为</span><br><span class="line">　　<span class="comment">/*if (dup2(error_log, STDERR_FILENO) == -1) &#123;</span></span><br><span class="line"><span class="comment">　　DIE(&quot;unable to dup2 the error log&quot;);</span></span><br><span class="line"><span class="comment">　　&#125;*/</span></span><br><span class="line">　　否则会出现错误：log.c:<span class="number">73</span> unable to dup2 the error log:bad file descriptor</span><br><span class="line">  </span><br><span class="line">  &lt;修改 src/boa.c&gt;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">if</span> (setuid(<span class="number">0</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">　　DIE(”icky Linux kernel bug!”)<span class="comment">;</span></span><br><span class="line">　　&#125;</span><br><span class="line">　　修改为</span><br><span class="line">　　<span class="symbol">#if</span> <span class="number">0</span></span><br><span class="line">　　<span class="meta">if</span> (setuid(<span class="number">0</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">　　DIE(”icky Linux kernel bug!”)<span class="comment">;</span></span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="symbol">#endif</span></span><br><span class="line">　　否则可能会出现错误：boa.c:<span class="number">228</span> 、 boa.c:<span class="number">226</span></span><br></pre></td></tr></table></figure>
+
+<p>boa 目录搭建完成之后<br>开始进行  web 服务器的文件根目录创建</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">返回根目录  cd ~</span><br><span class="line">　sudo mkdir /var/www 创建目录</span><br><span class="line">　　sudo chmod -R <span class="number">777</span> /var/www 修改权限</span><br><span class="line">  【创建<span class="built_in">log</span>目录】</span><br><span class="line">         sudo mkdir /var/<span class="built_in">log</span>/boa</span><br><span class="line">　　sudo mkdir /var/<span class="built_in">log</span>/boa/error_log</span><br><span class="line">　　sudo mkdir /var/<span class="built_in">log</span>/boa/access_log</span><br><span class="line">　　sudo chmod -R <span class="number">777</span> /var/<span class="built_in">log</span>/boa 修改权限</span><br><span class="line">　　sudo chmod -R <span class="number">777</span> /var/<span class="built_in">log</span>/boa/error_log 修改权限</span><br><span class="line">　　sudo chmod -R <span class="number">777</span> /var/<span class="built_in">log</span>/boa/access_log 修改权限</span><br><span class="line">  【创建 cgi 目录·】</span><br><span class="line">         sudo mkdir /var/www/cgi-bin 创建cgi文件存放目录</span><br><span class="line">　　sudo chmod -R <span class="number">777</span> /var/www/cgi-bin 修改权限</span><br><span class="line">  </span><br><span class="line">  在 src 目录下 编译</span><br><span class="line">  　 cd ~ 返回根目录</span><br><span class="line">　　cd Destop/boa<span class="number">-0.94</span><span class="number">.13</span>/src 切换目录</span><br><span class="line">　　make 编译</span><br><span class="line">  在 src 目录下 运行boa</span><br><span class="line">      sudo ./boa 必须在src目录下运行</span><br><span class="line">    查看进程</span><br><span class="line">    ps -e 看boa是否已经运行</span><br><span class="line">    网页测试</span><br><span class="line">    浏览器访问：http:<span class="comment">//127.0.0.1</span></span><br><span class="line">    　　注意：默认端口是<span class="number">80</span>，如果你的<span class="number">80</span>端口已经被占用，可以修改/etc/boa/boa.conf，变更Port <span class="number">80</span>。这里对应修改：http:<span class="comment">//127.0.0.1:端口号</span></span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">【cgi 程序测试】</span><br><span class="line">　　将Destop/boa<span class="number">-0.94</span><span class="number">.13</span>/examples目录下的cgi-test.cgi拷贝到var/www/cgi-bin</span><br><span class="line">　　浏览器访问：http:<span class="comment">//127.0.0.1/cgi-bin/cgi-test.cgi</span></span><br><span class="line">（现在你可以删掉boa<span class="number">-0.94</span><span class="number">.13</span>.tar.gz，然后把解压后的目录boa<span class="number">-0.94</span><span class="number">.13</span>放到你自己想放的地方，但是每次运行boa自己要容易找到位置。）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/images/cgi-test.png"></p>
+<p>cgi:<br> &lt;CGI—又叫  通用网关接口 &gt;<br>是 Web 服务器运行时外部程序的规范，按 CGI 编写的程序可以拓展服务器功能<br>CGI 应用程序能与浏览器进行交互，还可通过数据API与数据库服务器等外部数据源进行通信，<br>从数据库服务器中获取数据。格式化为HTML文档后，发送给浏览器，<br>也可以将从浏览器获得的数据放到数据库中。</p>
+<p><strong>A-9 —&gt;CGI—&gt;BOA—&gt;HTML<br>网页发控制表单—–&gt;CGI—&gt;相应的cgi进程控制硬件</strong></p>
+<p>c 和 HTML 语言有一个交互<br>这是c与cgi的数据交互： .c–&gt;,cgi<br>其实  cgi 就是app<br>只是cgi提供了 c 和 html 的超文本协议的交互</p>
+<p>CGI程序的工作一般流程就是   ①<br>接收表单数据<br>进行数据处理，最后根据处理结果生成新的页面   返回给浏览器</p>
+<pre><code>表单一般用  POST 方法提交给服务器，由CGI程序获得
+    程序根据 元素名字/值 中的元素名字来区分数据，
+    完成数据处理后，再读取相应的模板文件，
+        根据注释标记和对应的数据填充到 HTML 文本中，生成最后页面返回给浏览器</code></pre>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年08月12日 19:03</p>
+        <p>原始链接： <a class="post-url" href="/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/" title="Boa服务器和cgi">https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/</a></p>
+        <footer>
+            <a href="https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io">
+                <img src="/images/logo.png" alt="Zhang  Hao">
+                Zhang  Hao
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" rel="external nofollow noreferrer">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" rel="external nofollow noreferrer" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/vx.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/vx.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/zfb.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" rel="external nofollow noreferrer" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/&title=《Boa服务器和cgi》 — NiuNiu&pic=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.ioimages/logo.png" rel="external nofollow noreferrer" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" rel="external nofollow noreferrer" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/&title=《Boa服务器和cgi》 — NiuNiu&source=NiuNiu的学习博客" rel="external nofollow noreferrer" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/" rel="external nofollow noreferrer" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Boa服务器和cgi》 — NiuNiu&url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/&via=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io" rel="external nofollow noreferrer" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/" rel="external nofollow noreferrer" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" rel="external nofollow noreferrer" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io/2020/08/12/Boa%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Ccgi/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/boa/" class="color4">boa</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#%E7%B1%BB%E6%AF%94-%EF%BC%9A-lt-boa-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8-gt"><span class="post-toc-text">类比 ： &lt;boa 服务器的作用&gt;</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#boa%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E6%B5%8B%E8%AF%95"><span class="post-toc-text">boa环境搭建和测试</span></a>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/12/%E5%88%9D%E8%AF%86JSON/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">初识JSON</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" rel="external nofollow noreferrer" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Zhang  Hao<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://github.com/NiuNiu-zhang/NiuNiu-zhang.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/JSON/">JSON</a><a class="category-link" href="/categories/%E5%A4%9A%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/">多进程/线程</a><a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="category-link" href="/categories/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85demo/">生产者消费者demo</a><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><a class="category-link" href="/categories/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B/">进程线程</a><a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E6%A0%88/">项目技术栈</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/boa/" style="font-size: 10px;">boa</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E6%A0%88/" style="font-size: 10px;">人脸识别技术栈</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/" style="font-size: 10px;">信号量</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93/" style="font-size: 10px;">有名管道</a> <a href="/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93%EF%BC%8C%E4%BF%A1%E5%8F%B7%E9%87%8F/" style="font-size: 10px;">有名管道，信号量</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">线程</a> <a href="/tags/%E7%BA%BF%E7%A8%8Bbug/" style="font-size: 10px;">线程bug</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1/" style="font-size: 10px;">线程通信</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 20px;">链表</a>
+        </div>
+    </div>
+    <a href="javascript:;" rel="external nofollow noreferrer" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/boa/" style="font-size: 10px;">boa</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF%E6%A0%88/" style="font-size: 10px;">人脸识别技术栈</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F/" style="font-size: 10px;">信号量</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93/" style="font-size: 10px;">有名管道</a> <a href="/tags/%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93%EF%BC%8C%E4%BF%A1%E5%8F%B7%E9%87%8F/" style="font-size: 10px;">有名管道，信号量</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">线程</a> <a href="/tags/%E7%BA%BF%E7%A8%8Bbug/" style="font-size: 10px;">线程bug</a> <a href="/tags/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1/" style="font-size: 10px;">线程通信</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 20px;">链表</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" rel="external nofollow noreferrer" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;" rel="external nofollow noreferrer">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="/js/animate.js"></script>
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
